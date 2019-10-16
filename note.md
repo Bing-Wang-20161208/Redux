@@ -15,3 +15,12 @@
     ——渲染组件使用store.dispatch(action方法)分发到对应需要更新的位置使用action改变状态
     ——子reducer处理actionType，写出需要如何改变
     ——渲染组件创建subscribe监听需要变化的state
+
+4.利用React-Redux自动连接Redux：
+    ——创建Reducers
+    ——合并Reducers
+    ——store createStore(reducer)
+    ——Provider store = {store}
+    ——connect(mapStateToProps, { ...actionCreators })(YourComponent)
+    ——编写actionCreators
+    ——修改Reducers，响应actionCreators的变化
