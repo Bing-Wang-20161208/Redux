@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redux原理</title>
+    <script src="https://cdn.bootcss.com/redux/4.0.4/redux.min.js"></script>
+</head>
+<body>
+    <button onclick="store.dispatch({type : 'decrease', n : 1})">-</button>
+    <span id="countDisplay">10</span>
+    <button onclick="store.dispatch({type : 'increase', n : 1})">+</button>
+<script>
+    const countDisplay = document.querySelector("#countDisplay");
+    const countState = {
+        count : 5
+    }
+    const changeState = (state, action) => {
+        if (!state) {
+            return countState;
+        }
+        switch (action.type) {
+            case "increase" :
+                return {    //保留原数据，不修改
+                    ...state,
+                    count : state.count + action.n
+                };
+            case "decrease" :
+                return {    //保留原数据，不修改
+                    ...state,
+                    count : state.count - action.n
+                };
+            default :
+                return state;
+        }
+    }
+    // const createStore = (reducer) => {
+    //     let state = null;
+    //     const getState = () => state;
+    //     const listeners = [];
+    //     const subscribe = (listener) => {listeners.push(listener)};
+    //     const dispatch = (action) => {
+    //         state = reducer(state, action);
+    //         listeners.forEach((listener) => {listener()});
+    //     }
+    //     dispatch({});
+    //     return {
+    //         getState,
+    //         dispatch,
+    //         subscribe
+    //     }
+    // }
+    const store = Redux.createStore(changeState);   //redux与react没有任何关系
+    const renderCount = () => {
+        countDisplay.innerHTML = store.getState().count;
+    }
+    renderCount();
+    store.subscribe(renderCount);
+</script>        
+</body>
+</html>
