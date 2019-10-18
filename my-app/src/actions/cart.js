@@ -25,3 +25,16 @@ export const decrement = (id) => {
         }
     }
 }
+//异步action，使用redux-thunk之后，就可以在actionCreator里return一个方法，这个方法的参数就是dispatch
+// export const decrementAsync = (id) => {
+//     return (dispatch) => {
+//         setTimeout (() => {
+//             dispatch(decrement(id));
+//         }, 1000)
+//     }
+// }
+export const decrementAsync = id => dispatch => {
+        setTimeout (() => {
+            dispatch(decrement(id));
+        }, 1000)
+    }
